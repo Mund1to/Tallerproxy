@@ -20,4 +20,10 @@ GitHub Actions corre los mismos tests en cada push a `main`.
 
 ## Extensión del Proxy (paso 5): caché
 
-`ShippingCalculatorProxy` guarda el envío por `order.id()` y no vuelve a llamar al calculador real para una orden ya calculada. Tiene una caché por implementación, así que al cambiar el flag nunca devuelve un precio que calculó el otro calculador.
+`ShippingCalculatorProxy` guarda el envío por `order.id()` y no vuelve a llamar al calculador real para una orden ya calculada. Mientras convivieron legacy y smart hubo una caché por implementación, para que al cambiar el flag nunca se devolviera un precio calculado por el otro calculador.
+
+## Limpieza (paso 6)
+
+Primero se encendió `smart-shipping` en `Shop` y `ShopTest` pasó de 110 a 115. Con todo en verde se borraron `LegacyShippingCalculator`, el flag y `FeatureFlags`, que ya no tenía usos. El Proxy quedó como caché delante de `SmartShippingCalculator` y `ShopTest` siguió en 115: la limpieza no cambió el comportamiento.
+
+Los tests de los dos caminos del flag (`usaLegacyConFlagApagado` y `usaSmartConFlagEncendido`) se borraron junto con el flag. Están en verde en el historial, desde `feat: add ShippingCalculatorProxy (flag off)` hasta `chore: enable smart-shipping`.
