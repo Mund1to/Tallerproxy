@@ -10,4 +10,8 @@ class SmartShippingCalculatorTest {
     @Test void cobraDosYMedioPorKilo() {
         assertEquals(5.0, calc.calculate(new Order("o1", "c1", "Bogotá", 100, 2))); // 2 kg × 2,5
     }
+
+    @Test void fueraDeBogotaSumaCinco() {
+        assertEquals(10.0, calc.calculate(new Order("o1", "c1", "Medellín", 100, 2))); // 2 kg × 2,5 + 5
+    }
 }
