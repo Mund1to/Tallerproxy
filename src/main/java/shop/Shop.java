@@ -5,6 +5,6 @@ public final class Shop {
     private Shop() {}
 
     public static Checkout checkout() {
-        return new Checkout();
+        return new Checkout(new LegacyShippingCalculator());
     }
 }
