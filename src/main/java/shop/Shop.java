@@ -5,7 +5,8 @@ public final class Shop {
     private Shop() {}
 
     public static Checkout checkout() {
-        FeatureFlags flags = new FeatureFlags(); // smart-shipping apagado
+        FeatureFlags flags = new FeatureFlags();
+        flags.enable("smart-shipping");
         return new Checkout(new ShippingCalculatorProxy(
                 new LegacyShippingCalculator(), new SmartShippingCalculator(), flags));
     }
