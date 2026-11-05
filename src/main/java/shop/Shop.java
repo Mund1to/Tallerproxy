@@ -5,6 +5,8 @@ public final class Shop {
     private Shop() {}
 
     public static Checkout checkout() {
-        return new Checkout(new LegacyShippingCalculator());
+        FeatureFlags flags = new FeatureFlags(); // smart-shipping apagado
+        ShippingCalculator smart = order -> 0.0;  // stub temporal: SmartShippingCalculator todavía no existe
+        return new Checkout(new ShippingCalculatorProxy(new LegacyShippingCalculator(), smart, flags));
     }
 }
